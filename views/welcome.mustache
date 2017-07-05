@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Sign Up</title>
+  </head>
+  <body>
+    <div class="">
+      <form class="sign-up" action="/signup" method="post">
+        <input type="text" name="first_name" value="" placeholder="Enter first_name">
+        <input type="text" name="last_name" value="" placeholder="Enter last name">
+        <input type="text" name="username" value="" placeholder="Enter Username">
+        <input type="password" name="password" value="" placeholder="Enter Password">
+        <input type="password" name="confirm_password" value="" placeholder="Confirm Password">
+        <input type="submit" name="" value="Submit">
+      </form>
+    </div>
+    <div class="">
+      <form class="sign-in" action="/signin" method="post">
+        <input type="text" name="username" value="" placeholder="Enter Username">
+        <input type="password" name="password" value="" placeholder="Enter Password">
+        <input type="submit" name="" value="submit">
+      </form>
+    </div>
+    <div class="display-gab">
+      {{#model}}
+        <h1>{{message}}</h1>
+      {{/model}}
+    </div>
+  </body>
+</html>

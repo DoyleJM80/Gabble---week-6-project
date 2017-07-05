@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Home</title>
+  </head>
+  <body>
+    <header>
+      <a href="/gab">create new gab</a>
+      <form class="log-out" action="/logout" method="post">
+        <input type="submit" name="" value="logout">
+      </form>
+    </header>
+    <h1>Hello!</h1>
+    <section>
+      {{#model}}
+        <div class="gabs">
+          {{message}}
+          <form class="" action="/like" method="post">
+            <input type="submit" name="" value="Like">
+          </form>
+          <form class="" action="/delete/{{id}}" method="post">
+            <input type="hidden" name="delete_id" value="{{id}}">
+            <input type="submit" name="" value="delete">
+          </form>
+        </div>
+      {{/model}}
+    </section>
+  </body>
+</html>
