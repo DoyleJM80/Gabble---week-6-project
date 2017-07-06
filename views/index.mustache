@@ -7,6 +7,7 @@
   <body>
     <header>
       <a href="/gab">create new gab</a>
+      <h4>you are logged in as {{sessionName}}</h4>
       <form class="log-out" action="/logout" method="post">
         <input type="submit" name="" value="logout">
       </form>
@@ -15,7 +16,7 @@
     <section>
       {{#model}}
         <div class="gabs">
-          {{message}}
+          <p>{{users.username}}: {{message}}</p>
           <form class="" action="/like" method="post">
             <input type="submit" name="" value="Like">
           </form>

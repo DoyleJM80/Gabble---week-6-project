@@ -9,8 +9,19 @@ const models = require('../models');
 
 module.exports = {
   renderIndex: (req, res) => {
-    models.Gab.findAll().then((gabs) => {
-      res.render('index', {model: gabs});
+    models.Gab.findAll({
+      include: [
+        {
+          model: models.User,
+          as: 'users'
+        }
+      ]
+    }).then((gabs) => {
+      let context = {
+        model: gabs,
+        sessionName: req.session.username
+      };
+      res.render('index', context);
     });
   },
   deleteGab: (req, res) => {
@@ -29,6 +40,3 @@ module.exports = {
     res.redirect('/welcome');
   }
 };
-// renderWelcome: (req, res) => {
-//   res.render('welcome', {});
-// }
