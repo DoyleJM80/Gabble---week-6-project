@@ -47,7 +47,7 @@ app.get('/welcome', welcomeController.renderWelcome);
 
 app.get('/gab', backToLogin, gabController.renderGab);
 
-app.get('/likes', backToLogin, likesController.renderLikes);
+app.get('/likes/:id', backToLogin, likesController.renderLikes);
 
 app.post('/signup', welcomeController.signupWelcome);
 
@@ -58,6 +58,8 @@ app.post('/gab', gabController.newGab);
 app.post('/delete/:id', indexController.deleteGab);
 
 app.post('/logout', indexController.logout);
+
+app.post('/like/:id', indexController.likeGab);
 
 
 app.listen(3000, () => {

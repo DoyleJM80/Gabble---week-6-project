@@ -15,7 +15,8 @@ module.exports = {
           model: models.User,
           as: 'users'
         }
-      ]
+      ],
+      order: [['createdAt', 'DESC']]
     }).then((gabs) => {
       let context = {
         model: gabs,
@@ -26,11 +27,25 @@ module.exports = {
   },
   deleteGab: (req, res) => {
     let id = req.params.id;
-    models.Gab.destroy({
+    models.Like.destroy({
       where: {
-        id: id
+        gab_id: req.params.id
       }
     }).then(() => {
+      models.Gab.destroy({
+        where: {
+          id: req.params.id
+        }
+      }).then(() => {
+        res.redirect('/');
+      });
+    });
+  },
+  likeGab: (req, res) => {
+    models.Like.create({
+      user_id: req.session.userId,
+      gab_id: req.params.id
+    }).then((result) => {
       res.redirect('/');
     });
   },

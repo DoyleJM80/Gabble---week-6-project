@@ -9,6 +9,22 @@ const models = require('../models');
 
 module.exports = {
   renderLikes: (req, res) => {
-    res.render('likes', {});
+    models.Like.findAll({
+      where: {
+        gab_id: req.params.id
+      }
+      // ,
+      // include: [
+      //   {
+      //     model: models.User,
+      //     as: 'users'
+      //   }
+      // ]
+    }).then((likes) => {
+      let context = {
+        model: likes,
+      };
+      res.render('likes', context);
+    });
   }
 };
