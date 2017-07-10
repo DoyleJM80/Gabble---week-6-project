@@ -22,10 +22,9 @@
             <input type="submit" name="" value="Like">
           </form>
           <h4><a href="/likes/{{id}}">Likes: </a>{{}}</h2>
-          <form class="" action="/delete/{{id}}" method="post">
-            <input type="hidden" name="delete_id" value="{{id}}">
-            <input type="submit" name="" value="delete">
-          </form>
+          {{#showDeleteIfOwner}}
+          {{sessionId}}
+          {{/showDeleteIfOwner}}
         </div>
       {{/model}}
     </section>

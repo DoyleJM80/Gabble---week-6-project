@@ -20,34 +20,47 @@ module.exports = {
     }).then((gabs) => {
       let context = {
         model: gabs,
-        sessionName: req.session.username
+        sessionName: req.session.username,
+        sessionId: req.session.userId
       };
       res.render('index', context);
     });
   },
   deleteGab: (req, res) => {
-    let id = req.params.id;
-    models.Like.destroy({
-      where: {
-        gab_id: req.params.id
-      }
-    }).then(() => {
-      models.Gab.destroy({
-        where: {
-          id: req.params.id
-        }
-      }).then(() => {
+    models.Gab.destroy(
+        {
+        where: { id: req.params.id, user_id: req.session.userId}
+      }).then(function() {
         res.redirect('/');
       });
-    });
+
+    // let id = req.params.id;
+    // models.Like.destroy({
+    //   where: {
+    //     gab_id: req.params.id
+    //   }
+    // }).then(() => {
+    //   models.Gab.destroy({
+    //     where: {
+    //       id: req.params.id
+    //     }
+    //   }).then(() => {
+    //     res.redirect('/');
+    //   });
+    // });
   },
   likeGab: (req, res) => {
-    models.Like.create({
-      user_id: req.session.userId,
-      gab_id: req.params.id
-    }).then((result) => {
-      res.redirect('/');
-    });
+    models.Gab.findOne(
+      {
+        where: {id: req.params.id},
+        include: [{
+            model: models.User,
+            as: 'users'
+          }],
+      }).then((gab) => {
+        gab.addUserLikes(req.session.userId);
+        res.redirect('/');
+      });
   },
   logout: (req, res) => {
     req.session.username = '';

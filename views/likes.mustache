@@ -6,10 +6,13 @@
   </head>
   <body>
     <h1>Likes</h1>
-    <ul>
-      {{#model}}
-        <li>{{user_id}}</li>
-      {{/model}}
-    </ul>
+        {{#model}}
+          <h3>{{users.username}}: {{message}}</h3>
+          <h2>Liked By:</h2>
+        {{/model}}
+        <ul>
+            <li></li>
+        </ul>
+
   </body>
 </html>

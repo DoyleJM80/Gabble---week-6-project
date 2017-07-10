@@ -27,8 +27,8 @@ module.exports = {
     res.redirect('/');
   },
   signinWelcome: (req, res) => {
-    var currentUser = req.body.username;
-    var currentPassword = req.body.password;
+    let currentUser = req.body.username;
+    let currentPassword = req.body.password;
     models.User.findOne({
       where: {
         username: currentUser,
