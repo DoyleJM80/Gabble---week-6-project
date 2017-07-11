@@ -23,6 +23,9 @@
       </form>
     </div>
     <div class="display-gab">
+      {{#msg}}
+      <p>{{.}}</p>
+      {{/msg}}
       {{#model}}
         <h1>{{message}}</h1>
       {{/model}}
