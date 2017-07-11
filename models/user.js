@@ -7,12 +7,13 @@ module.exports = function(sequelize, DataTypes) {
     last_name: DataTypes.STRING
   }, {});
 
+  User.hook('beforeDelete', (user, options) => {
+    console.log('lkasjdflkasdklfh');
+  });
+
   User.associate = function(models) {
-    User.hasMany(models.Gab, {as: 'messages', foreignKey: 'user_id'});
-    User.belongsToMany(models.Gab, {as: 'GabLikes', through: 'userGabs', foreignKey: 'user_id', onDelete: 'CASCADE'});
+    User.hasMany(models.Gab, {as: 'messages', foreignKey: 'user_id', onDelete: 'cascade', hooks: true});
+    User.belongsToMany(models.Gab, {as: 'GabLikes', through: 'userGabs', foreignKey: 'user_id', onDelete: 'cascade', hooks: true});
   };
-
-
-
   return User;
 };

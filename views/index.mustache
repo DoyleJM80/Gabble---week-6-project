@@ -7,7 +7,7 @@
   <body>
     <header>
       <a href="/gab">create new gab</a>
-      <h4>you are logged in as {{sessionName}}</h4>
+      <h4>you are logged in as {{name}}</h4>
       <form class="log-out" action="/logout" method="post">
         <input type="submit" name="" value="logout">
       </form>
@@ -17,13 +17,18 @@
       {{#model}}
         <div class="gabs">
           <p>{{users.username}}: {{message}}</p>
+          {{#UserLikes.length}}
+          <a href="/likes/{{id}}">Likes: {{.}}</a>
+          {{/UserLikes.length}}
+          {{^UserLikes.length}}
+          <a href="/likes/{{id}}">No Likes Yet</a>
+          {{/UserLikes.length}}
           <form class="" action="/like/{{id}}" method="post">
             <input type="hidden" name="like_id" value="{{id}}">
             <input type="submit" name="" value="Like">
           </form>
-          <h4><a href="/likes/{{id}}">Likes: </a>{{}}</h2>
           {{#showDeleteIfOwner}}
-          {{sessionId}}
+          {{loggedInUser}}
           {{/showDeleteIfOwner}}
         </div>
       {{/model}}

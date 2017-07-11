@@ -5,14 +5,21 @@
     <title>Likes</title>
   </head>
   <body>
-    <h1>Likes</h1>
-        {{#model}}
-          <h3>{{users.username}}: {{message}}</h3>
-          <h2>Liked By:</h2>
-        {{/model}}
-        <ul>
-            <li></li>
-        </ul>
+    <h1>likes</h1>
+    <div class="gab">
+      {{#model}}
+      <h3>{{users.username}}: {{message}}</h3>
+      <p>{{createdAt}}</p>
+      <p>Liked By:</p>
+      {{/model}}
+      {{#likes}}
+      <ul>
+        <li>{{.}}</li>
+      </ul>
+      {{/likes}}
+      {{^likes}}
+      <p>No likes yet</p>
+      {{/likes}}
 
   </body>
 </html>

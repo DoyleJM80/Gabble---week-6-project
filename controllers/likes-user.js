@@ -17,18 +17,21 @@ module.exports = {
         model: models.User,
         as: 'users'
       }]
-      // ,
-      // include: [
-      //   {
-      //     model: models.User,
-      //     as: 'users'
-      //   }
-      // ]
     }).then((gab) => {
-      let context = {
-        model: gab
-      };
-      res.render('likes', context);
+      gab.getUserLikes().then((result) => {
+        let context = {
+          model: gab,
+          name: req.session.name,
+          loggedIn: true,
+          signedIn: true,
+          likes: []
+        };
+        for (var i = 0; i < result.length; i++) {
+          context.likes.push(result[i].username);
+        }
+        console.log(context.likes);
+        res.render('likes', context);
+      });
     });
   }
 };

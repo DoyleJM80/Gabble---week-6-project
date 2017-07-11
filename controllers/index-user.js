@@ -9,20 +9,22 @@ const models = require('../models');
 
 module.exports = {
   renderIndex: (req, res) => {
+    let context = {
+      loggedIn: true,
+      name: req.session.username,
+      signedIn: true,
+      loggedInUser: req.session.userId,
+      modelArray: []
+    };
     models.Gab.findAll({
       include: [
         {
           model: models.User,
           as: 'users'
-        }
-      ],
+        }, 'UserLikes'],
       order: [['createdAt', 'DESC']]
     }).then((gabs) => {
-      let context = {
-        model: gabs,
-        sessionName: req.session.username,
-        sessionId: req.session.userId
-      };
+      context.model = gabs;
       res.render('index', context);
     });
   },
@@ -33,7 +35,6 @@ module.exports = {
       }).then(function() {
         res.redirect('/');
       });
-
     // let id = req.params.id;
     // models.Like.destroy({
     //   where: {

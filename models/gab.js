@@ -5,9 +5,11 @@ module.exports = function(sequelize, DataTypes) {
     user_id: DataTypes.INTEGER
   }, {});
 
+  
+
   Gab.associate = function(models) {
-    Gab.belongsToMany(models.User, {as: 'UserLikes', through: 'userGabs', foreignKey: 'gab_id', onDelete: 'CASCADE'});
-    Gab.belongsTo(models.User, {as: 'users', foreignKey: 'user_id'});
+    Gab.belongsToMany(models.User, {as: 'UserLikes', through: 'userGabs', foreignKey: 'gab_id', onDelete: 'cascade', hooks: true});
+    Gab.belongsTo(models.User, {as: 'users', foreignKey: 'user_id', onDelete: 'cascade', hooks: true});
   };
 
   Gab.prototype.showDeleteIfOwner = function() {
